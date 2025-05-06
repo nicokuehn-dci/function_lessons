@@ -1,1 +1,26 @@
-{"username": "Nico", "lessons_completed": []}
+{
+  "username": "Nico",
+  "lessons_completed": [
+    {
+      "lesson_name": "Factorial",
+      "completed_at": "2025-05-06 10:00:00",
+      "details": {
+        "steps_completed": ["Introduction", "Recursive Method", "Iterative Method"],
+        "score": 100
+      }
+    },
+    {
+      "lesson_name": "Fibonacci",
+      "completed_at": "2025-05-06 11:00:00",
+      "details": {
+        "steps_completed": ["Introduction", "Recursive Method", "Dynamic Programming"],
+        "score": 95
+      }
+    }
+  ],
+  "last_session": "2025-05-06 12:00:00",
+  "preferences": {
+    "color_scheme": "dark",
+    "difficulty_level": "medium"
+  }
+}

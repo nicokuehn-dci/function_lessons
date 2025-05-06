@@ -65,3 +65,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 ## Author
 
 Created by Nico Kuehn as part of an interactive learning project. Happy coding!
+
+### Watermark
+
+All scripts include a watermark: "Coded by Nico Kuehn".

@@ -11,9 +11,9 @@ def recursive_sum(lst):
     """
     Recursively calculates the sum of a list of numbers.
     :param lst: List of numbers
-        :return: Sum of the numbers in the list
+    :return: Sum of the numbers in the list
     """
-        if len(lst) == 0:
+    if len(lst) == 0:
         return 0
     else:
         return lst[0] + recursive_sum(lst[1:])

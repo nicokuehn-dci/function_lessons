@@ -25,6 +25,7 @@ def display_rules():
     print("Press Enter to start the game...")
     input()
     clear_console()
+    print("\033[1;34mCoded by Nico Kuehn\033[0m")
     print("Game started!")
 
 # Function to calculate the square root with steps and code explanation
@@ -59,12 +60,13 @@ def calculate_sum_with_recursion_and_code(number):
     print(f"\033[1;36mResult: The sum of numbers from 1 to {number} is {total_sum}.\033[0m")
     return total_sum
 
-# Function to save user data to a JSON file with datetime and lessons completed
-def save_user_data(username, lessons_completed):
+# Function to save user data to a JSON file with detailed lesson information
+def save_user_data(username, lessons_completed, preferences):
     user_data = {
         "username": username,
         "lessons_completed": lessons_completed,
-        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        "last_session": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "preferences": preferences
     }
     with open("user_data.json", "w") as file:
         json.dump(user_data, file, indent=4)
@@ -77,30 +79,40 @@ def load_user_data():
     except FileNotFoundError:
         return None
 
-# Function to get or create user data
+# Function to get or create user data with detailed structure
 def get_or_create_user():
     user_data = load_user_data()
     if user_data:
         print(f"Welcome back, {user_data['username']}!")
-        print(f"Lessons completed: {', '.join([lesson['lesson'] for lesson in user_data['lessons_completed']])}")
+        print("Lessons completed:")
+        for lesson in user_data["lessons_completed"]:
+            print(f"- {lesson['lesson_name']} (Completed at: {lesson['completed_at']})")
     else:
         username = input("Enter your name: ")
+        preferences = {
+            "color_scheme": "dark",
+            "difficulty_level": "medium"
+        }
         user_data = {
             "username": username,
-            "lessons_completed": []
+            "lessons_completed": [],
+            "preferences": preferences
         }
-        save_user_data(username, user_data["lessons_completed"])
+        save_user_data(username, user_data["lessons_completed"], preferences)
         print(f"Welcome, {username}! Your progress will be saved.")
     return user_data
 
-# Function to update lessons completed with datetime
-def update_lessons_completed(user_data, lesson):
-    if lesson not in [entry['lesson'] for entry in user_data["lessons_completed"]]:
-        user_data["lessons_completed"].append({
-            "lesson": lesson,
-            "completed_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        })
-        save_user_data(user_data["username"], user_data["lessons_completed"])
+# Function to update lessons completed with detailed information
+def update_lessons_completed(user_data, lesson_name, steps_completed, score):
+    user_data["lessons_completed"].append({
+        "lesson_name": lesson_name,
+        "completed_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "details": {
+            "steps_completed": steps_completed,
+            "score": score
+        }
+    })
+    save_user_data(user_data["username"], user_data["lessons_completed"], user_data["preferences"])
 
 # Function to display lesson options and get user choice
 def choose_lesson():
@@ -110,22 +122,24 @@ def choose_lesson():
     print("3. Authorization")
     print("4. Additional Examples")
     print("5. Functions")
-    print("6. Exit")
+    print("6. New Function")
+    print("7. Exit")
     while True:
         try:
             choice = int(input("\033[1;35mEnter the number of your choice: \033[0m"))
-            if choice in range(1, 7):
+            if choice in range(1, 8):
                 return choice
             else:
-                print("\033[1;31mInvalid choice. Please select a number between 1 and 6.\033[0m")
+                print("\033[1;31mInvalid choice. Please select a number between 1 and 7.\033[0m")
         except ValueError:
             print("\033[1;31mInvalid input. Please enter a number.\033[0m")
 
 # Function to handle lessons step by step
 def factorial_lesson():
     print("\033[1;34mWelcome to the Factorial Lesson!\033[0m")
-    print("Step 1: A factorial of a number is the product of all positive integers up to that number.")
-    print("Example: 5! = 5 * 4 * 3 * 2 * 1 = 120")
+    number = random.randint(3, 10)
+    print(f"Step 1: A factorial of a number is the product of all positive integers up to that number.")
+    print(f"Example: {number}! = {number} * {number-1} * {number-2} * ... * 1")
     input("Press Enter to continue...")
     print("Step 2: Factorials are often used in permutations and combinations.")
     input("Press Enter to continue...")
@@ -137,28 +151,112 @@ def factorial_lesson():
     print("        else:")
     print("            return n * factorial(n - 1)")
     input("Press Enter to continue...")
-    print("\033[1;36mLesson completed!\033[0m")
+    print(f"\033[1;36mLesson completed! You learned about factorials using the number {number}.\033[0m")
 
-# Add similar functions for other lessons
+# Function to generate random examples for Fibonacci Lesson
 def fibonacci_lesson():
     print("\033[1;34mWelcome to the Fibonacci Lesson!\033[0m")
-    # ...similar step-by-step explanation for Fibonacci...
-    print("\033[1;36mLesson completed!\033[0m")
+    sequence_length = random.randint(5, 10)
+    print(f"Step 1: The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones.")
+    print(f"Example: Let's generate the first {sequence_length} numbers of the Fibonacci sequence.")
+    input("Press Enter to continue...")
+    print("Step 2: Fibonacci numbers are often used in algorithms and data structures.")
+    input("Press Enter to continue...")
+    print("Step 3: Let's calculate Fibonacci numbers using Python.")
+    print("Code:")
+    print("    def fibonacci(n):")
+    print("        if n <= 0:")
+    print("            return 0")
+    print("        elif n == 1:")
+    print("            return 1")
+    print("        else:")
+    print("            return fibonacci(n - 1) + fibonacci(n - 2)")
+    input("Press Enter to continue...")
+    print(f"\033[1;36mLesson completed! You explored Fibonacci sequences up to {sequence_length} terms.\033[0m")
 
+# Function to generate random examples for Authorization Lesson
 def authorization_lesson():
     print("\033[1;34mWelcome to the Authorization Lesson!\033[0m")
-    # ...similar step-by-step explanation for Authorization...
-    print("\033[1;36mLesson completed!\033[0m")
+    usernames = ["admin", "user1", "guest"]
+    selected_user = random.choice(usernames)
+    print(f"Step 1: Authorization is the process of verifying if a user has access to a resource.")
+    print(f"Example: Let's authorize the user '{selected_user}'.")
+    input("Press Enter to continue...")
+    print("Step 2: Authorization often involves checking usernames and passwords.")
+    input("Press Enter to continue...")
+    print("Step 3: Let's implement a basic authorization system in Python.")
+    print("Code:")
+    print("    def authorize(username, password):")
+    print("        if username == 'admin' and password == 'password':")
+    print("            return 'Access granted'")
+    print("        else:")
+    print("            return 'Access denied'")
+    input("Press Enter to continue...")
+    print(f"\033[1;36mLesson completed! You learned about authorizing the user '{selected_user}'.\033[0m")
 
+# Function to generate random examples for Additional Examples Lesson
 def additional_examples_lesson():
     print("\033[1;34mWelcome to the Additional Examples Lesson!\033[0m")
-    # ...similar step-by-step explanation for Additional Examples...
-    print("\033[1;36mLesson completed!\033[0m")
+    operations = ["sum", "product", "average"]
+    selected_operation = random.choice(operations)
+    numbers = [random.randint(1, 10) for _ in range(5)]
+    print(f"Step 1: Let's perform a {selected_operation} operation on the numbers {numbers}.")
+    input("Press Enter to continue...")
+    print("Step 2: These operations are commonly used in data analysis and statistics.")
+    input("Press Enter to continue...")
+    print("Step 3: Let's implement the {selected_operation} operation in Python.")
+    print("Code:")
+    if selected_operation == "sum":
+        print("    result = sum(numbers)")
+    elif selected_operation == "product":
+        print("    result = 1")
+        print("    for num in numbers:")
+        print("        result *= num")
+    elif selected_operation == "average":
+        print("    result = sum(numbers) / len(numbers)")
+    input("Press Enter to continue...")
+    print(f"\033[1;36mLesson completed! You performed a {selected_operation} operation on {numbers}.\033[0m")
 
+# Function to generate random examples for Functions Lesson
 def functions_lesson():
     print("\033[1;34mWelcome to the Functions Lesson!\033[0m")
-    # ...similar step-by-step explanation for Functions...
-    print("\033[1;36mLesson completed!\033[0m")
+    function_names = ["add", "subtract", "multiply", "divide"]
+    selected_function = random.choice(function_names)
+    print(f"Step 1: Functions are reusable blocks of code that perform a specific task.")
+    print(f"Example: Let's implement a function to {selected_function} two numbers.")
+    input("Press Enter to continue...")
+    print("Step 2: Functions help in organizing and reusing code.")
+    input("Press Enter to continue...")
+    print("Step 3: Let's write a Python function to {selected_function} two numbers.")
+    print("Code:")
+    if selected_function == "add":
+        print("    def add(a, b):")
+        print("        return a + b")
+    elif selected_function == "subtract":
+        print("    def subtract(a, b):")
+        print("        return a - b")
+    elif selected_function == "multiply":
+        print("    def multiply(a, b):")
+        print("        return a * b")
+    elif selected_function == "divide":
+        print("    def divide(a, b):")
+        print("        return a / b")
+    input("Press Enter to continue...")
+    print(f"\033[1;36mLesson completed! You implemented a function to {selected_function} two numbers.\033[0m")
+
+# Function to handle New Function Lesson
+def new_function_lesson():
+    print("\033[1;34mWelcome to the New Function Lesson!\033[0m")
+    print("Step 1: Learn how to create and use new functions in Python.")
+    input("Press Enter to continue...")
+    print("Step 2: Functions allow you to encapsulate logic and reuse it.")
+    input("Press Enter to continue...")
+    print("Step 3: Let's write a new function in Python.")
+    print("Code:")
+    print("    def new_function(param):")
+    print("        return param * 2")
+    input("Press Enter to continue...")
+    print("\033[1;36mLesson completed! You learned about creating new functions.\033[0m")
 
 # Function to randomly select lessons
 LESSONS = [
@@ -166,7 +264,8 @@ LESSONS = [
     "Fibonacci",
     "Authorization",
     "Additional Examples",
-    "Functions"
+    "Functions",
+    "New Function"
 ]
 
 def choose_random_lessons():
@@ -188,6 +287,8 @@ def handle_lessons(selected_lessons):
             additional_examples_lesson()
         elif lesson == "Functions":
             functions_lesson()
+        elif lesson == "New Function":
+            new_function_lesson()
 
 # Function to play the game with random lessons
 def play_game():
@@ -207,3 +308,5 @@ def play_game():
 # Main function to run the game
 if __name__ == "__main__":
     play_game()
+
+# Coded by Nico Kuehn
