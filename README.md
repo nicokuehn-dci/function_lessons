@@ -26,6 +26,12 @@ Welcome to the **Function Lessons Game**! This interactive Python program is des
 4. **Additional Examples**: Dive into various programming examples to enhance your skills.
 5. **Functions**: Master the fundamentals of functions in Python, including recursion and built-in functions.
 
+## Recent Updates
+
+- Enhanced lessons with detailed explanations and full code examples.
+- Improved interactivity and user experience in all lessons.
+- Added comprehensive examples for functions, factorials, Fibonacci, and more.
+
 ## File Structure
 
 - `exercise_game.py`: Main script to run the game.
