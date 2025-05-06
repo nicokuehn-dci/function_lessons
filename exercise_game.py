@@ -123,14 +123,15 @@ def choose_lesson():
     print("4. Additional Examples")
     print("5. Functions")
     print("6. New Function")
-    print("7. Exit")
+    print("7. Recursion")
+    print("8. Exit")
     while True:
         try:
             choice = int(input("\033[1;35mEnter the number of your choice: \033[0m"))
-            if choice in range(1, 8):
+            if choice in range(1, 9):
                 return choice
             else:
-                print("\033[1;31mInvalid choice. Please select a number between 1 and 7.\033[0m")
+                print("\033[1;31mInvalid choice. Please select a number between 1 and 8.\033[0m")
         except ValueError:
             print("\033[1;31mInvalid input. Please enter a number.\033[0m")
 
@@ -149,6 +150,8 @@ def handle_lessons(selected_lessons):
             functions_lesson()
         elif lesson == "New Function":
             new_function_lesson()
+        elif lesson == "Recursion":
+            recursion_lesson()
 
 # Function to make lessons deeper using examples from the root directory
 def factorial_lesson():
@@ -338,7 +341,6 @@ def functions_lesson():
     print("2. User-defined Functions: Created by the user.")
     print("3. Lambda Functions: Anonymous functions defined using the lambda keyword.")
     input("Press Enter to continue...")
-
     print("Step 4: Full Code Example")
     print("Here is a full example demonstrating different types of functions:")
     print("""
@@ -375,6 +377,58 @@ def new_function_lesson():
     input("Press Enter to continue...")
     print("\033[1;36mLesson completed! You learned about creating new functions.\033[0m")
 
+# Function to handle Recursion Lesson
+def recursion_lesson():
+    print("\033[1;34mWelcome to the Recursion Lesson!\033[0m")
+    print("Step 1: What is Recursion?")
+    print("Recursion is a technique where a function calls itself to solve smaller instances of a problem.")
+    input("Press Enter to continue...")
+
+    print("Step 2: Key Concepts")
+    print("1. Base Case: The condition under which the recursion stops.")
+    print("2. Recursive Case: The part of the function where it calls itself to solve a smaller problem.")
+    input("Press Enter to continue...")
+
+    print("Step 3: Example - Factorial Calculation")
+    print("Code:")
+    print("""
+    def factorial_recursive(n):
+        if n == 0 or n == 1:  # Base case
+            return 1
+        else:
+            return n * factorial_recursive(n - 1)  # Recursive case
+    """)
+    input("Press Enter to continue...")
+
+    print("Step 4: Example - Fibonacci Sequence")
+    print("Code:")
+    print("""
+    def fibonacci_recursive(n):
+        if n <= 0:
+            return 0
+        elif n == 1:
+            return 1
+        else:
+            return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
+    """)
+    input("Press Enter to continue...")
+
+    print("Step 5: Advantages and Disadvantages")
+    print("Advantages:")
+    print("- Simplifies code for problems with a natural recursive structure.")
+    print("- Makes the code more readable for certain problems.")
+    print("Disadvantages:")
+    print("- Can lead to high memory usage due to the function call stack.")
+    print("- May be less efficient than iterative solutions for some problems.")
+    input("Press Enter to continue...")
+
+    print("Step 6: Practice Problems")
+    print("1. Write a recursive function to calculate the sum of all elements in a list.")
+    print("2. Implement a recursive function to reverse a string.")
+    print("3. Create a recursive function to find the greatest common divisor (GCD) of two numbers.")
+    input("Press Enter to complete the lesson...")
+    print("\033[1;36mLesson completed!\033[0m")
+
 # Function to randomly select lessons
 LESSONS = [
     "Factorial",
@@ -382,7 +436,8 @@ LESSONS = [
     "Authorization",
     "Additional Examples",
     "Functions",
-    "New Function"
+    "New Function",
+    "Recursion"
 ]
 
 def choose_random_lessons():
@@ -406,6 +461,8 @@ def handle_lessons(selected_lessons):
             functions_lesson()
         elif lesson == "New Function":
             new_function_lesson()
+        elif lesson == "Recursion":
+            recursion_lesson()
 
 # Function to play the game with menu selection
 def play_game():
@@ -426,6 +483,8 @@ def play_game():
         elif lesson_choice == 6:
             new_function_lesson()
         elif lesson_choice == 7:
+            recursion_lesson()
+        elif lesson_choice == 8:
             print("\033[1;31mExiting the game. Goodbye!\033[0m")
             break
 
