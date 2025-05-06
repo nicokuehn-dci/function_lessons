@@ -7,6 +7,7 @@ import os
 import sys
 import math
 import json
+import atexit
 from datetime import datetime
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from new_function import recursive_sum
@@ -71,6 +72,11 @@ def save_user_data(username, lessons_completed, preferences):
     with open("user_data.json", "w") as file:
         json.dump(user_data, file, indent=4)
 
+# Function to save user data in real-time
+def save_user_data_realtime(user_data):
+    with open("user_data.json", "w") as file:
+        json.dump(user_data, file, indent=4)
+
 # Function to load user data from a JSON file
 def load_user_data():
     try:
@@ -124,6 +130,7 @@ def choose_lesson():
     print("5. Functions")
     print("6. New Function")
     print("7. Recursion")
+    
     print("8. Exit")
     while True:
         try:
@@ -467,6 +474,7 @@ def handle_lessons(selected_lessons):
 # Function to play the game with menu selection
 def play_game():
     user_data = get_or_create_user()
+    atexit.register(lambda: save_user_data_realtime(user_data))
     while True:
         print("\033[1;34mChoose a lesson from the menu:\033[0m")
         lesson_choice = choose_lesson()
