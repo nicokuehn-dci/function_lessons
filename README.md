@@ -25,6 +25,7 @@ Welcome to the **Function Lessons Game**! This interactive Python program is des
 3. **Authorization**: Explore basic and advanced authorization techniques, including lockout mechanisms.
 4. **Additional Examples**: Dive into various programming examples to enhance your skills.
 5. **Functions**: Master the fundamentals of functions in Python, including recursion and built-in functions.
+6. **Recursion**: Understand recursion with examples like factorial, Fibonacci, and more.
 
 ## Recent Updates
 
