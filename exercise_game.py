@@ -135,23 +135,53 @@ def choose_lesson():
             print("\033[1;31mInvalid input. Please enter a number.\033[0m")
 
 # Function to handle lessons step by step
+def handle_lessons(selected_lessons):
+    for lesson in selected_lessons:
+        if lesson == "Factorial":
+            factorial_lesson()
+        elif lesson == "Fibonacci":
+            fibonacci_lesson()
+        elif lesson == "Authorization":
+            authorization_lesson()
+        elif lesson == "Additional Examples":
+            additional_examples_lesson()
+        elif lesson == "Functions":
+            functions_lesson()
+        elif lesson == "New Function":
+            new_function_lesson()
+
+# Function to make lessons deeper using examples from the root directory
 def factorial_lesson():
     print("\033[1;34mWelcome to the Factorial Lesson!\033[0m")
-    number = random.randint(3, 10)
-    print(f"Step 1: A factorial of a number is the product of all positive integers up to that number.")
-    print(f"Example: {number}! = {number} * {number-1} * {number-2} * ... * 1")
+    print("Step 1: What is a Factorial?")
+    print("A factorial of a number is the product of all positive integers up to that number.")
+    print("For example, 5! = 5 * 4 * 3 * 2 * 1 = 120.")
     input("Press Enter to continue...")
-    print("Step 2: Factorials are often used in permutations and combinations.")
-    input("Press Enter to continue...")
-    print("Step 3: Let's calculate a factorial using Python.")
+
+    print("Step 2: Exploring Factorial Examples")
+    print("Let's look at some examples from the `factorial_examples.py` file.")
     print("Code:")
-    print("    def factorial(n):")
-    print("        if n == 0 or n == 1:")
-    print("            return 1")
-    print("        else:")
-    print("            return n * factorial(n - 1)")
+    with open("factorial_examples.py", "r") as file:
+        print(file.read())
     input("Press Enter to continue...")
-    print(f"\033[1;36mLesson completed! You learned about factorials using the number {number}.\033[0m")
+
+    print("Step 3: Explanation of the Code")
+    print("The code demonstrates different ways to calculate factorials, including iterative and recursive methods.")
+    print("Iterative: Uses a loop to multiply numbers.")
+    print("Recursive: Calls the function within itself to calculate the factorial.")
+    input("Press Enter to continue...")
+
+    print("Step 4: Try It Yourself")
+    print("Now, let's calculate a factorial using the provided examples.")
+    while True:
+        try:
+            number = int(input("Enter a number to calculate its factorial: "))
+            break
+        except ValueError:
+            print("\033[1;31mInvalid input. Please enter a valid number.\033[0m")
+    print(f"The factorial of {number} is calculated using the examples in the file.")
+    input("Press Enter to complete the lesson...")
+    print("\033[1;36mLesson completed!\033[0m")
 
 # Function to generate random examples for Fibonacci Lesson
 def fibonacci_lesson():
@@ -197,52 +227,139 @@ def authorization_lesson():
 # Function to generate random examples for Additional Examples Lesson
 def additional_examples_lesson():
     print("\033[1;34mWelcome to the Additional Examples Lesson!\033[0m")
-    operations = ["sum", "product", "average"]
-    selected_operation = random.choice(operations)
-    numbers = [random.randint(1, 10) for _ in range(5)]
-    print(f"Step 1: Let's perform a {selected_operation} operation on the numbers {numbers}.")
+    print("Step 1: Understanding Different Summing Methods")
+    print("In this lesson, we will explore various ways to calculate the sum of a list of numbers.")
     input("Press Enter to continue...")
-    print("Step 2: These operations are commonly used in data analysis and statistics.")
-    input("Press Enter to continue...")
-    print("Step 3: Let's implement the {selected_operation} operation in Python.")
+
+    print("Step 2: Using List Comprehension")
+    print("This method uses a list comprehension to create a new list of numbers and then sums them.")
     print("Code:")
-    if selected_operation == "sum":
-        print("    result = sum(numbers)")
-    elif selected_operation == "product":
-        print("    result = 1")
-        print("    for num in numbers:")
-        print("        result *= num")
-    elif selected_operation == "average":
-        print("    result = sum(numbers) / len(numbers)")
+    print("""
+    def sum_with_comprehension(list_of_nums):
+        return sum([num for num in list_of_nums])
+    """)
     input("Press Enter to continue...")
-    print(f"\033[1;36mLesson completed! You performed a {selected_operation} operation on {numbers}.\033[0m")
+
+    print("Step 3: Using a While Loop")
+    print("This method uses a while loop to iterate through the list and calculate the sum.")
+    print("Code:")
+    print("""
+    def sum_with_while_loop(list_of_nums):
+        total = 0
+        index = 0
+        while index < len(list_of_nums):
+            total += list_of_nums[index]
+            index += 1
+        return total
+    """)
+    input("Press Enter to continue...")
+
+    print("Step 4: Using Reduce from functools")
+    print("This method uses the reduce function to calculate the sum of the list.")
+    print("Code:")
+    print("""
+    from functools import reduce
+
+    def sum_with_reduce(list_of_nums):
+        return reduce(lambda x, y: x + y, list_of_nums)
+    """)
+    input("Press Enter to continue...")
+
+    print("Step 5: Using Numpy for Summation")
+    print("This method uses the numpy library to calculate the sum of the list.")
+    print("Code:")
+    print("""
+    import numpy as np
+
+    def sum_with_numpy(list_of_nums):
+        return np.sum(list_of_nums)
+    """)
+    input("Press Enter to continue...")
+
+    print("Step 6: Full Code Example")
+    print("Here is the full code combining all methods:")
+    print("""
+    # Additional Examples of Summing Methods in Python
+
+    # Example 1: Using List Comprehension
+    def sum_with_comprehension(list_of_nums):
+        return sum([num for num in list_of_nums])
+
+    # Example 2: Using a While Loop
+    def sum_with_while_loop(list_of_nums):
+        total = 0
+        index = 0
+        while index < len(list_of_nums):
+            total += list_of_nums[index]
+            index += 1
+        return total
+
+    # Example 3: Using Reduce from functools
+    from functools import reduce
+
+    def sum_with_reduce(list_of_nums):
+        return reduce(lambda x, y: x + y, list_of_nums)
+
+    # Example 4: Using Numpy for Summation
+    import numpy as np
+
+    def sum_with_numpy(list_of_nums):
+        return np.sum(list_of_nums)
+
+    # Example usage
+    if __name__ == "__main__":
+        list_of_nums = [1, 2, 3, 4, 5, 6, 8, 4, 1, 2, 3, 6, 9, 4]
+        print("Sum with comprehension:", sum_with_comprehension(list_of_nums))
+        print("Sum with while loop:", sum_with_while_loop(list_of_nums))
+        print("Sum with reduce:", sum_with_reduce(list_of_nums))
+        print("Sum with numpy:", sum_with_numpy(list_of_nums))
+    """)
+    input("Press Enter to complete the lesson...")
+    print("\033[1;36mLesson completed!\033[0m")
 
 # Function to generate random examples for Functions Lesson
 def functions_lesson():
     print("\033[1;34mWelcome to the Functions Lesson!\033[0m")
-    function_names = ["add", "subtract", "multiply", "divide"]
-    selected_function = random.choice(function_names)
-    print(f"Step 1: Functions are reusable blocks of code that perform a specific task.")
-    print(f"Example: Let's implement a function to {selected_function} two numbers.")
+    print("Step 1: What are Functions?")
+    print("Functions are reusable blocks of code that perform a specific task. They help in organizing and reusing code.")
     input("Press Enter to continue...")
-    print("Step 2: Functions help in organizing and reusing code.")
-    input("Press Enter to continue...")
-    print("Step 3: Let's write a Python function to {selected_function} two numbers.")
+
+    print("Step 2: Anatomy of a Function")
+    print("A function typically has a name, parameters, a body, and a return statement.")
     print("Code:")
-    if selected_function == "add":
-        print("    def add(a, b):")
-        print("        return a + b")
-    elif selected_function == "subtract":
-        print("    def subtract(a, b):")
-        print("        return a - b")
-    elif selected_function == "multiply":
-        print("    def multiply(a, b):")
-        print("        return a * b")
-    elif selected_function == "divide":
-        print("    def divide(a, b):")
-        print("        return a / b")
+    print("""
+    def greet(name):
+        return f"Hello, {name}!"
+    """)
     input("Press Enter to continue...")
-    print(f"\033[1;36mLesson completed! You implemented a function to {selected_function} two numbers.\033[0m")
+
+    print("Step 3: Types of Functions")
+    print("1. Built-in Functions: Provided by Python, e.g., len(), print().")
+    print("2. User-defined Functions: Created by the user.")
+    print("3. Lambda Functions: Anonymous functions defined using the lambda keyword.")
+    input("Press Enter to continue...")
+
+    print("Step 4: Full Code Example")
+    print("Here is a full example demonstrating different types of functions:")
+    print("""
+    # Example of a User-defined Function
+    def add(a, b):
+        return a + b
+
+    # Example of a Lambda Function
+    multiply = lambda x, y: x * y
+
+    # Using Built-in Functions
+    numbers = [1, 2, 3, 4, 5]
+    print("Length of list:", len(numbers))
+    print("Sum of list:", sum(numbers))
+
+    # Using User-defined and Lambda Functions
+    print("Addition:", add(10, 5))
+    print("Multiplication:", multiply(10, 5))
+    """)
+    input("Press Enter to complete the lesson...")
+    print("\033[1;36mLesson completed!\033[0m")
 
 # Function to handle New Function Lesson
 def new_function_lesson():
@@ -290,23 +407,31 @@ def handle_lessons(selected_lessons):
         elif lesson == "New Function":
             new_function_lesson()
 
-# Function to play the game with random lessons
+# Function to play the game with menu selection
 def play_game():
     user_data = get_or_create_user()
     while True:
-        print("\033[1;34mDo you want to learn random lessons? (yes/no)\033[0m")
-        choice = input("\033[1;35mEnter your choice: \033[0m").strip().lower()
-        if choice == "yes":
-            selected_lessons = choose_random_lessons()
-            handle_lessons(selected_lessons)
-        elif choice == "no":
+        print("\033[1;34mChoose a lesson from the menu:\033[0m")
+        lesson_choice = choose_lesson()
+        if lesson_choice == 1:
+            factorial_lesson()
+        elif lesson_choice == 2:
+            fibonacci_lesson()
+        elif lesson_choice == 3:
+            authorization_lesson()
+        elif lesson_choice == 4:
+            additional_examples_lesson()
+        elif lesson_choice == 5:
+            functions_lesson()
+        elif lesson_choice == 6:
+            new_function_lesson()
+        elif lesson_choice == 7:
             print("\033[1;31mExiting the game. Goodbye!\033[0m")
             break
-        else:
-            print("\033[1;31mInvalid input. Please enter 'yes' or 'no'.\033[0m")
 
 # Main function to run the game
 if __name__ == "__main__":
+    print("\033[1;34mCoded by Nico Kuehn\033[0m")
     play_game()
 
 # Coded by Nico Kuehn
