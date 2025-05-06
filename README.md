@@ -50,9 +50,9 @@ Welcome to the **Function Lessons Game**! This interactive Python program is des
    ```bash
    cd function_lessons
    ```
-3. Run the main script:
+3. Run the start script:
    ```bash
-   python3 exercise_game.py
+   bash start.sh
    ```
 
 ## Requirements
